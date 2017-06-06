@@ -10,7 +10,7 @@
     width: 800px;
 }
 </style>
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA2n520Q17Llr7HrJPRakk79zJTiK1JgTc"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=ВАШ КЛЮЧ"></script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <script type="text/javascript">
@@ -68,7 +68,7 @@ createMap();  //открываем карту
         $(document).ready(function() {
             $.ajax({
                 type: "GET",
-                url: "http://geek42.webutu.com/open.php",
+                url: "http://ХОСТ/open.php",
                 dataType: 'html',
                 success: function(getdata) {
 var data = getdata.split('||');
