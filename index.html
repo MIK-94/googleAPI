@@ -14,7 +14,7 @@
 }
 </style>
 
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA2n520Q17Llr7HrJPRakk79zJTiK1JgTc"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=ВАШ КЛЮЧ"></script>
  <script type="text/javascript">
  var latitude =0;
  var longitude = 0;
@@ -81,7 +81,7 @@ var lng = document.getElementById('longitude').value;
 var txt = document.getElementById('title').value;
 $.ajax({
                 type: "POST",
-                url: "http://geek42.webutu.com/3/save.php",
+                url: "http://хост/save.php",
                 data: {lat: lat, lng: lng, txt: txt},
                 success: function(data){
                     alert(data);
