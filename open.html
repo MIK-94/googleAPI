@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="main.css" type="text/css"/>
+<style>
+#map {
+   position:relative;
+    height: 550px;
+    width: 800px;
+}
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA2n520Q17Llr7HrJPRakk79zJTiK1JgTc"></script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+function createMap() {
+//Выбираем город
+var city=document.FormOpenmap.Address.value;  
+(function($){ //Отправляем запрос города на google.map
+        $(document).ready(function() {
+            $.ajax({
+                type: "GET",
+                url: "http://maps.google.com/maps/api/geocode/xml?address="+city,
+                dataType    : 'html',
+                success: function(xml) {
+
+// Читаем xml
+var xmlDoc = $.parseXML( xml );
+var lat = $( xmlDoc ).find( "location" ).find("lat");
+var lon = $( xmlDoc ).find( "location" ).find("lng");
+lat = lat.text();
+lon = lon.text();
+// Рисуем карту
+var myLatlng = new google.maps.LatLng(lat,lon); 
+var mapOptions = {
+            zoom: 10,
+            center: myLatlng,
+            mapTypeControl: true,
+            navigationControlOptions: {
+                style: google.maps.NavigationControlStyle.SMALL
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            };			
+            map = new google.maps.Map(
+                document.getElementById("map"), mapOptions
+                );
+
+                }  
+            });
+        });
+    })(jQuery);
+}
+
+function proverka() { 
+if (document.FormOpenmap.Address.value=='') { 
+alert("Вы забыли указать свой город =)"); 
+return false; 
+    }
+}
+
+function createMarkers() {
+proverka();
+createMap();  //открываем карту
+
+(function($){ //Отправляем запрос города на google.map
+        $(document).ready(function() {
+            $.ajax({
+                type: "GET",
+                url: "http://geek42.webutu.com/open.php",
+                dataType: 'html',
+                success: function(getdata) {
+var data = getdata.split('||');
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; var j = 0;
+        var markers = [];
+        for (var i = 0; i <data.length-1; i=i+3) {
+          var latLng = new google.maps.LatLng(data[i],
+              data[i+1]);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            title: data[i+2],
+            label: labels[j]
+          });
+          markers.push(marker);  j++;
+        }
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+                }  
+            });
+        });
+    })(jQuery);
+/// конец запроса
+
+} 
+</script>
+
+</head>
+<body>
+<div id="wrap">
+ <form name="FormOpenmap" align="center">
+Твой город:<input type="text" name="Address" size="40" placeholder="Введите свой город">
+ <!--<input id="city" name="city">  -->
+		<input type="button" value="Показать мне" onclick="createMarkers();" />
+<a href='index.html'>Назад</a>
+</form>
+<br> <br> <br>
+<div id="map"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="main.css" type="text/css"/>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<title>HTML5 Geolocation API</title>
+
+<style>
+#mapContainer {
+    position:relative;
+    height: 550px;
+    width: 850px;
+}
+</style>
+
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA2n520Q17Llr7HrJPRakk79zJTiK1JgTc"></script>
+ <script type="text/javascript">
+ var latitude =0;
+ var longitude = 0;
+function showMap() {
+//получаем переменную из панели ввода
+lat=(document.getElementById("latitude").value);    
+lon=(document.getElementById("longitude").value); 
+text=(document.getElementById("title").value);
+
+var coords = new google.maps.LatLng(lat, lon);
+			var mapOptions = {
+            zoom: 15,
+            center: coords,
+            mapTypeControl: true,
+            navigationControlOptions: {
+                style: google.maps.NavigationControlStyle.SMALL
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(
+                document.getElementById("mapContainer"), mapOptions
+                );
+            var marker = new google.maps.Marker({
+                    position: coords,
+                    map: map,
+                    title: text
+            });
+}
+
+if(navigator.geolocation) {
+function geo_success(position) {
+			var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            var lat = document.getElementById('latitude');
+			var lon = document.getElementById('longitude');		
+   lat.value = latitude;
+   lon.value = longitude;
+}
+
+function geo_error(error) {
+    if(error.code == PERMISSION_DENIED) alert("Местоположение не определенно");
+    if(error.code == POSITION_UNAVAILABLE) alert("Сеть не активна");
+    if(error.code == POSITION_UNAVAILABLE) alert("Превышено время ожидания");
+}
+
+var geo_options = {
+    enableHighAccuracy : true, 
+    maximumAge : 4500, 
+    timeout  : 3000
+};
+navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
+}
+</script>
+
+
+
+</head>
+
+<body>
+<script type="text/javascript">
+function saveData() {
+var lat = document.getElementById('latitude').value;
+var lng = document.getElementById('longitude').value;
+var txt = document.getElementById('title').value;
+$.ajax({
+                type: "POST",
+                url: "http://geek42.webutu.com/3/save.php",
+                data: {lat: lat, lng: lng, txt: txt},
+                success: function(data){
+                    alert(data);
+                }
+            });
+}
+</script>
+<div id="wrap" align="center">
+<pre>
+
+
+                         Текст: <input name="title" id="title" style="width:250px;" placeholder="стратегический объект №1" onkeyup="var yratext=/['|']/; if(yratext.test(this.value)) alert('пожалуйста используйте другие символы')"> </br>
+ Широта: <input id="latitude" name="latitude" style="width:80px;" placeholder="0" onkeyup="var yratext=/['|']/; if(yratext.test(this.value)) alert('пожалуйста используйте другие символы')"> </br>
+Долгота: <input id="longitude" name="longitude" style="width:80px;" placeholder="0" onkeyup="var yratext=/['|']/; if(yratext.test(this.value)) alert('пожалуйста используйте другие символы')"> </br>
+</pre>
+				<input type="button"   value="Сохранить в базу" onclick="saveData();" />
+				<input type="button" value="Показать меня на карте" onclick="showMap();" />
+                                <button onclick="location.href = 'open.html'">Показать все геометки</button>
+                              
+<br> <br> <br> <br>
+<div id="mapContainer"></div>
+</div>
+</body>
+</html>
