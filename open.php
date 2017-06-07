@@ -1,8 +1,8 @@
 <?php
-$username = "id223860_admin"; 
-$password = "lolipop"; 
+$username = "pokemon"; 
+$password = "0000"; 
 $hostname = "localhost"; 
-$databasename = "id223860_test"; 
+$databasename = "id223860_mybase"; 
 
 $conn = new mysqli($hostname, $username, $password, $databasename) or die('Невозможно открыть базу');
    // Формируем запрос из таблицы
