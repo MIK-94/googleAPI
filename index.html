@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="main.css" type="text/css"/>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-<title>HTML5 Geolocation API</title>
+<title>Map of your users</title>
 
 <style>
 #mapContainer {
@@ -14,7 +14,7 @@
 }
 </style>
 
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=ВАШ КЛЮЧ"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA2n520Q17Llr7HrJPRakk79zJTiK1JgTc"></script>
  <script type="text/javascript">
  var latitude =0;
  var longitude = 0;
@@ -81,7 +81,7 @@ var lng = document.getElementById('longitude').value;
 var txt = document.getElementById('title').value;
 $.ajax({
                 type: "POST",
-                url: "http://хост/save.php",
+                url: "http://geek42.webutu.com/3/save.php",
                 data: {lat: lat, lng: lng, txt: txt},
                 success: function(data){
                     alert(data);
@@ -97,6 +97,24 @@ $.ajax({
  Широта: <input id="latitude" name="latitude" style="width:80px;" placeholder="0" onkeyup="var yratext=/['|']/; if(yratext.test(this.value)) alert('пожалуйста используйте другие символы')"> </br>
 Долгота: <input id="longitude" name="longitude" style="width:80px;" placeholder="0" onkeyup="var yratext=/['|']/; if(yratext.test(this.value)) alert('пожалуйста используйте другие символы')"> </br>
 </pre>
+<script> //попытка определить город, если не удалось через google() точное местоположение
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://freegeoip.net/json/', false);
+xhr.send();
+if (xhr.status != 200) {
+// обработать ошибку
+  alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+      } else {
+        // вывести результат
+var element = JSON.parse(xhr.responseText);
+var latitude = element.latitude;
+var longitude = element.longitude; 
+} 
+var lat = document.getElementById('latitude');
+var lng = document.getElementById('longitude');
+lat.value  = latitude; 
+lng.value  = longitude;
+</script>
 				<input type="button"   value="Сохранить в базу" onclick="saveData();" />
 				<input type="button" value="Показать меня на карте" onclick="showMap();" />
                                 <button onclick="location.href = 'open.html'">Показать все геометки</button>
