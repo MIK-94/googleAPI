@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="main.css" type="text/css"/>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <title>Map of your users</title>
-
 <style>
 #mapContainer {
     position:relative;
@@ -13,8 +12,7 @@
     width: 850px;
 }
 </style>
-
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA2n520Q17Llr7HrJPRakk79zJTiK1JgTc"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=##########################"></script>
  <script type="text/javascript">
  var latitude =0;
  var longitude = 0;
@@ -68,11 +66,7 @@ var geo_options = {
 navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
 }
 </script>
-
-
-
 </head>
-
 <body>
 <script type="text/javascript">
 function saveData() {
@@ -91,11 +85,9 @@ $.ajax({
 </script>
 <div id="wrap" align="center">
 <pre>
-
-
-                         Текст: <input name="title" id="title" style="width:250px;" placeholder="стратегический объект №1" onkeyup="var yratext=/['|']/; if(yratext.test(this.value)) alert('пожалуйста используйте другие символы')"> </br>
- Широта: <input id="latitude" name="latitude" style="width:80px;" placeholder="0" onkeyup="var yratext=/['|']/; if(yratext.test(this.value)) alert('пожалуйста используйте другие символы')"> </br>
-Долгота: <input id="longitude" name="longitude" style="width:80px;" placeholder="0" onkeyup="var yratext=/['|']/; if(yratext.test(this.value)) alert('пожалуйста используйте другие символы')"> </br>
+Текст: <input name="title" id="title" style="width:250px;" placeholder="стратегический объект №1"> </br>
+Широта: <input id="latitude" name="latitude" style="width:80px;" placeholder="0"> </br>
+Долгота: <input id="longitude" name="longitude" style="width:80px;" placeholder="0"> </br>
 </pre>
 <script> //попытка определить город, если не удалось через google() точное местоположение
 var xhr = new XMLHttpRequest();
