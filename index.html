@@ -71,7 +71,7 @@ $.ajax({
 Широта: <input id="latitude" name="latitude" style="width:80px;" placeholder="0" onkeyup="showError()"> </br>
 Долгота: <input id="longitude" name="longitude" style="width:80px;" placeholder="0" onkeyup="showError()"> </br>
 </pre>
-<script> //попытка определить город, если не удалось через google() получить точное местоположение
+<script> //попытка определить город пользователя
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'http://freegeoip.net/json/', false);
 xhr.send();
