@@ -69,13 +69,18 @@ navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
 </head>
 <body>
 <script type="text/javascript">
-function saveData() {
+function showError() { //предупреждение пользователя не ломать модуль
+var yratext=/['|']/; 
+   if(yratext.test(this.value)); 
+   alert('пожалуйста не используйте эти символы');
+}	
+function saveData() { //сохранение данных
 var lat = document.getElementById('latitude').value;
 var lng = document.getElementById('longitude').value;
 var txt = document.getElementById('title').value;
 $.ajax({
                 type: "POST",
-                url: "http://geek42.webutu.com/3/save.php",
+                url: "http://geek42.webutu.com/save.php",
                 data: {lat: lat, lng: lng, txt: txt},
                 success: function(data){
                     alert(data);
@@ -85,11 +90,11 @@ $.ajax({
 </script>
 <div id="wrap" align="center">
 <pre>
-Текст: <input name="title" id="title" style="width:250px;" placeholder="стратегический объект №1"> </br>
-Широта: <input id="latitude" name="latitude" style="width:80px;" placeholder="0"> </br>
-Долгота: <input id="longitude" name="longitude" style="width:80px;" placeholder="0"> </br>
+Текст: <input name="title" id="title" style="width:250px;" placeholder="стратегический объект №1" onkeyup="showError()"> </br>
+Широта: <input id="latitude" name="latitude" style="width:80px;" placeholder="0" onkeyup="showError()"> </br>
+Долгота: <input id="longitude" name="longitude" style="width:80px;" placeholder="0" onkeyup="showError()"> </br>
 </pre>
-<script> //попытка определить город, если не удалось через google() точное местоположение
+<script> //попытка определить город, если не удалось через google() получить точное местоположение
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'http://freegeoip.net/json/', false);
 xhr.send();
