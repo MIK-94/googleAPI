@@ -99,10 +99,9 @@ var xhr = new XMLHttpRequest();
 xhr.open('GET', 'http://freegeoip.net/json/', false);
 xhr.send();
 if (xhr.status != 200) {
-// обработать ошибку
   alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
       } else {
-        // вывести результат
+// вывести результат//
 var element = JSON.parse(xhr.responseText);
 var latitude = element.latitude;
 var longitude = element.longitude; 
