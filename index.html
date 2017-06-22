@@ -17,11 +17,11 @@
  var latitude =0;
  var longitude = 0;
 function showMap() {
-//получаем переменную из панели ввода
+//получаем переменные
 lat=(document.getElementById("latitude").value);    
 lon=(document.getElementById("longitude").value); 
 text=(document.getElementById("title").value);
-
+//рисуем карту с одной меткой	
 var coords = new google.maps.LatLng(lat, lon);
 			var mapOptions = {
             zoom: 15,
@@ -41,39 +41,16 @@ var coords = new google.maps.LatLng(lat, lon);
                     title: text
             });
 }
-
-if(navigator.geolocation) {
-function geo_success(position) {
-			var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-            var lat = document.getElementById('latitude');
-			var lon = document.getElementById('longitude');		
-   lat.value = latitude;
-   lon.value = longitude;
-}
-
-function geo_error(error) {
-    if(error.code == PERMISSION_DENIED) alert("Местоположение не определенно");
-    if(error.code == POSITION_UNAVAILABLE) alert("Сеть не активна");
-    if(error.code == POSITION_UNAVAILABLE) alert("Превышено время ожидания");
-}
-
-var geo_options = {
-    enableHighAccuracy : true, 
-    maximumAge : 4500, 
-    timeout  : 3000
-};
-navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
-}
 </script>
 </head>
 <body>
 <script type="text/javascript">
 function showError() { //предупреждение пользователя не ломать модуль
-var yratext=/['|']/; 
+var yratext=/['|']/;  //функция не понадобится, если исправить недостаток(2)
    if(yratext.test(this.value)); 
    alert('пожалуйста не используйте эти символы');
 }	
+	
 function saveData() { //сохранение данных
 var lat = document.getElementById('latitude').value;
 var lng = document.getElementById('longitude').value;
