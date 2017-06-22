@@ -43,12 +43,6 @@ var coords = new google.maps.LatLng(lat, lon);
 </head>
 <body>
 <script type="text/javascript">
-function showError() { //предупреждение пользователя не ломать модуль
-var yratext=/['|']/;  //функция не понадобится, если исправить недостаток(2)
-   if(yratext.test(this.value)); 
-   alert('пожалуйста не используйте эти символы');
-}	
-	
 function saveData() { //сохранение данных
 var lat = document.getElementById('latitude').value;
 var lng = document.getElementById('longitude').value;
@@ -65,9 +59,9 @@ $.ajax({
 </script>
 <div id="wrap" align="center">
 <pre>
-Текст: <input name="title" id="title" style="width:250px;" placeholder="стратегический объект №1" onkeyup="showError()"> </br>
-Широта: <input id="latitude" name="latitude" style="width:80px;" placeholder="0" onkeyup="showError()"> </br>
-Долгота: <input id="longitude" name="longitude" style="width:80px;" placeholder="0" onkeyup="showError()"> </br>
+Текст: <input name="title" id="title" style="width:250px;" placeholder="стратегический объект №1"> </br>
+Широта: <input id="latitude" name="latitude" style="width:80px;" placeholder="0"> </br>
+Долгота: <input id="longitude" name="longitude" style="width:80px;" placeholder="0"> </br>
 </pre>
 <script> //попытка определить город пользователя
 var xhr = new XMLHttpRequest();
