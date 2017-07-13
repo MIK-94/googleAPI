@@ -8,9 +8,7 @@
 1)нет функции, которая определяла бы координаты по клику на карте  <br>
 2)при обращении к базе, очень некрасивая сортировка координат (через метод split),  <br>
 ```markdown
-<script>
 var data = getdata.split('||');  
-
         var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; var j = 0;
         var markers = [];
         for (var i = 0; i <data.length-1; i=i+3) {
@@ -22,7 +20,6 @@ var data = getdata.split('||');
             label: labels[j]
           });
           markers.push(marker);  j++;
-        }
-</script>        
+        }     
 ```
 это серьезное нарушение, обязательно нуждается в исправлении! <br>
